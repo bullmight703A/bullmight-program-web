@@ -1,0 +1,16 @@
+94a23f36 RESOLVE MERGE: Fix conflict, add dynamic title tag in correct location, preserve CSS animations
+ad3017fb NIGHT PROTOCOL: Fix SEO issues - Add dynamic title tag & fix ChildCare schema to FinancialService
+3b05552e Fix header text and page syntax error
+4e53743d Fix SEO spacer
+08591b34 Deploy Revive Health SPA layout to live repo
+867608c8 SEO & WEBINAR FIX: Remove deprecated wp_titles and deploy blank webinar template to bypass SPA hijacking
+56285765 Fix SA pixel - move outside PHP block to prevent fatal error
+2a435404 Add Search Atlas dynamic optimization pixel to header
+dc54574e Final Polish: Vibrant Gold, Bold Typography, Footer Fix, and Iframe Sizing
+db182699 UI Overhaul: Replaced legacy templates, fixed header tags, and improved contrast
+183b01b4 UI Isolate: Dequeued legacy Kidazzle CSS and fixed body background conflict
+7639fd1a Fix UI layout: Re-enable Tailwind CDN and enqueue style.css
+6ed954cd Implement full WIMPER SPA Identity in theme
+95f65f4a Restructure: Theme files moved to root for WP Pusher compatibility
+10e6be87 Restructure: Move theme files back to kidazzle subdirectory for main branch
+c9a88b72 Refactor: Move theme files to root for WP Pusher compatibility

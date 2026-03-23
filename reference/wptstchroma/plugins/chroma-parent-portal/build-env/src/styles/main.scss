@@ -1,0 +1,525 @@
+// Corporate Luxury Palette
+$bg-color: #FDFBF7;
+$card-bg: #FFFFFF;
+$text-primary: #1F2937;
+$text-secondary: #6B7280;
+$gold-accent: #9D8253;
+$navy-brand: #263238;
+$sidebar-bg: #FFFFFF;
+
+:root {
+    --sidebar-width: 280px;
+    --sidebar-collapsed-width: 80px;
+    --transition-speed: 0.3s;
+}
+
+body.portal-is-active {
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    background: $bg-color !important;
+
+    #chroma-parent-portal-root {
+        display: flex !important;
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 999999 !important;
+        background: $bg-color !important;
+    }
+}
+
+#chroma-parent-portal-root {
+    font-family: 'Inter', sans-serif !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: $bg-color !important;
+    display: flex !important;
+    flex-direction: column !important;
+    z-index: 999999 !important;
+    overflow: hidden !important;
+}
+
+.portal-app-wrapper,
+.glass-app-shell {
+    width: 100vw !important;
+    height: 100vh !important;
+    display: flex !important;
+    background: $bg-color;
+    overflow: hidden !important;
+}
+
+.portal-sidebar {
+    width: var(--sidebar-width);
+    background: $sidebar-bg;
+    border-right: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 30px;
+    transition: width var(--transition-speed) ease, padding var(--transition-speed) ease;
+    position: relative;
+    z-index: 1000;
+
+    &.collapsed {
+        width: var(--sidebar-collapsed-width);
+        padding: 40px 15px;
+
+        .sidebar-logo {
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        .nav-item {
+            justify-content: center;
+            padding: 12px 0;
+            width: 50px;
+            margin: 0 auto;
+        }
+
+        .sidebar-footer {
+            text-align: center;
+        }
+    }
+
+    .sidebar-toggle {
+        position: absolute;
+        top: 20px;
+        right: -15px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background: white;
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1100;
+        color: $navy-brand;
+        font-size: 12px;
+        transition: background 0.2s;
+
+        &:hover {
+            background: #f0f0f0;
+        }
+    }
+}
+
+.portal-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: $bg-color;
+    transition: all var(--transition-speed) ease;
+
+    .main-viewport {
+        flex: 1;
+        overflow-y: auto;
+        padding: 40px 60px;
+
+        @media (max-width: 1024px) {
+            padding: 30px;
+        }
+
+        @media (max-width: 768px) {
+            padding: 20px;
+        }
+    }
+}
+
+// Media Queries for overall responsiveness
+@media (max-width: 1200px) {
+    #chroma-parent-portal-root {
+        --sidebar-width: 240px;
+    }
+}
+
+@media (max-width: 992px) {
+    .glass-app-shell:not(.sidebar-collapsed) {
+        .portal-sidebar {
+            width: var(--sidebar-collapsed-width);
+            padding: 40px 15px;
+
+            .sidebar-logo span,
+            .nav-item .label,
+            .sidebar-footer .admin-badge:not(:empty) {
+                display: none;
+            }
+
+            .nav-item {
+                justify-content: center;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+
+        .right {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+}
+
+// Keep the rest of the styles (cards, buttons, etc.)
+.glass-card {
+    background: white;
+    border-radius: 24px;
+    padding: 35px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 6px;
+        background: $gold-accent;
+        border-radius: 4px 0 0 4px;
+    }
+}
+
+.portal-btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    background: $navy-brand;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+        background: lighten($navy-brand, 10%);
+    }
+}
+
+// Very small viewports (< 320px)
+@media (max-width: 320px) {
+    .portal-sidebar {
+        display: none !important;
+    }
+
+    .portal-main .main-viewport {
+        padding: 15px;
+    }
+
+    .glass-card {
+        padding: 20px;
+        border-radius: 16px;
+    }
+}
+
+// Notched Phone Safe Areas
+@supports (padding: env(safe-area-inset-top)) {
+    #chroma-parent-portal-root {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+}
+
+// Performance: Smooth animations
+.portal-sidebar {
+    will-change: width, padding;
+}
+
+
+// Focus Styles for Accessibility
+.sidebar-toggle:focus {
+    outline: 2px solid $gold-accent;
+    outline-offset: 2px;
+}
+
+.nav-item:focus {
+    outline: 2px solid $gold-accent;
+    outline-offset: -2px;
+}
+
+/* --- Login Screen Styles --- */
+.chroma-login-screen {
+    .pin-display {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        margin-bottom: 40px;
+
+        .digit {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            transition: all 0.2s ease;
+
+            &.active {
+                background: #6366f1;
+                transform: scale(1.2);
+            }
+        }
+    }
+
+    .pin-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 300px;
+        margin: 0 auto;
+
+        button {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            border: 1px solid #e2e8f0;
+            background: white;
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+
+            &:hover {
+                background: #f8fafc;
+                border-color: #cbd5e1;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            }
+
+            &:active {
+                transform: translateY(0);
+            }
+
+            &.clear {
+                font-size: 1rem;
+                font-weight: 600;
+                color: #ef4444;
+            }
+        }
+    }
+}
+
+/* --- Sidebar Component Styles --- */
+.portal-sidebar {
+    .sidebar-logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 40px;
+        padding-left: 10px;
+
+        img {
+            width: 32px;
+            height: auto;
+        }
+
+        span {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: $navy-brand;
+            letter-spacing: -0.02em;
+        }
+    }
+
+    .sidebar-nav {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .nav-item {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 12px 16px;
+        border: none;
+        background: transparent;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: all 0.2s;
+        position: relative;
+        text-align: left;
+        color: $text-secondary;
+        font-family: 'Inter', sans-serif;
+        font-weight: 500;
+        font-size: 0.95rem;
+
+        .icon {
+            font-size: 1.2rem;
+            width: 24px;
+            display: flex;
+            justify-content: center;
+            margin-right: 12px;
+        }
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.03);
+            color: $navy-brand;
+        }
+
+        &.active {
+            color: $navy-brand;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            font-weight: 600;
+
+            .icon {
+                transform: scale(1.1);
+            }
+        }
+
+        .active-indicator {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: $gold-accent; // Gold
+            border-radius: 0 4px 4px 0;
+        }
+    }
+
+    .sidebar-footer {
+        margin-top: auto;
+        padding-top: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+
+        .admin-badge {
+            background: #FEF3C7;
+            color: #92400E;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 6px 12px;
+            border-radius: 20px;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+    }
+}
+
+/* --- Dashboard Header Styles --- */
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+
+    .brand {
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: $navy-brand;
+            margin: 0;
+            line-height: 1.1;
+        }
+
+        p {
+            font-size: 0.9rem;
+            color: $text-secondary;
+            margin: 4px 0 0 0;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    }
+}
+
+/* --- Dashboard Grid & Cards --- */
+.dashboard-grid {
+    width: 100%;
+}
+
+.section-header {
+
+    h2,
+    h3 {
+        font-family: 'Playfair Display', serif;
+        color: $navy-brand;
+        margin: 0;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+    }
+
+    .add-btn {
+        background: transparent;
+        border: 1px solid $navy-brand;
+        color: $navy-brand;
+        padding: 6px 12px;
+        border-radius: 8px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+
+        &:hover {
+            background: $navy-brand;
+            color: white;
+        }
+    }
+}
+
+.downloads-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.pdf-card {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fafc;
+
+    &:hover {
+        background: white;
+        border-color: $gold-accent;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    h4 {
+        margin: 8px 0 4px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: $navy-brand;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .meta {
+        font-size: 0.75rem;
+        color: $text-secondary;
+    }
+}

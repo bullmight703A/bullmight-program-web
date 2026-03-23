@@ -1,0 +1,225 @@
+/*
+Theme Name: W.I.M.P.E.R. Program Theme
+Theme URI: https://thewimperprogram.com/
+Author: W.I.M.P.E.R. Development Team
+Author URI: https://thewimperprogram.com/
+Description: dedicated theme for the W.I.M.P.E.R. Program. Focused on financial architecture and payroll efficiency.
+Version: 2.0.0
+Requires at least: 6.0
+Tested up to: 6.7
+Requires PHP: 8.0
+License: Proprietary
+License URI: All rights reserved
+Text Domain: wimper-theme
+Tags: financial, business, tailwind, custom-theme, wimper
+
+W.I.M.P.E.R. Theme
+Copyright (C) 2026 W.I.M.P.E.R. Program Inc.
+All rights reserved. This theme is proprietary software.
+*/
+/* KIDazzle Root Branding Variables 2.0 */
+:root {
+    --kd-gold: #D4AF37;
+    --kd-black: #1A1A1A;
+    --kd-white: #FFFFFF;
+    --kd-radius: 24px;
+    --kd-shadow: 0 10px 30px rgba(0,0,0,0.05);
+
+    --navy: #020617;
+    --gold: #C5A021;
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-400: #cbd5e1;
+    /* Brighter slate for better contrast */
+    --slate-600: #94a3b8;
+}
+
+.kd-bento-card {
+    background: var(--kd-white);
+    border-radius: var(--kd-radius);
+    padding: 2.5rem;
+    box-shadow: var(--kd-shadow);
+    border: 1px solid rgba(0,0,0,0.02);
+    transition: all 0.3s ease;
+}
+
+.kd-bento-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+/**
+ * This file only contains the WordPress theme header.
+ * All styles are compiled via Tailwind CSS into assets/css/main.css
+ * and enqueued via inc/enqueue.php
+ */
+
+/* Fallback Utilities for Schedule Layout */
+.gap-x-4 {
+    column-gap: 1rem;
+}
+
+.gap-y-4 {
+    row-gap: 1rem;
+}
+
+.w-14 {
+    width: 3.5rem;
+}
+
+.h-14 {
+    height: 3.5rem;
+}
+
+@media (min-width: 768px) {
+    .md\:w-16 {
+        width: 4rem;
+    }
+
+    .md\:h-16 {
+        height: 4rem;
+    }
+}
+
+/* W.I.M.P.E.R. SPA Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    color: #e2e8f0;
+    background-color: #020617;
+    overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    font-family: 'Playfair Display', serif;
+}
+
+.bg-navy {
+    background-color: #020617;
+}
+
+.text-gold {
+    color: #d4af37;
+}
+
+.border-gold {
+    border-color: #d4af37;
+}
+
+.bg-gold {
+    background-color: #d4af37;
+}
+
+.hover-text-gold:hover {
+    color: #d4af37;
+}
+
+.hero-gradient {
+    background: radial-gradient(circle at 50% 0%, #1e293b 0%, #020617 100%);
+}
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.98);
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.15);
+}
+
+.glow-text {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+}
+
+.page-header-spacer {
+    padding-top: 140px;
+    padding-bottom: 80px;
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.nav-link {
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 900;
+    transition: color 0.3s;
+    cursor: pointer;
+    margin-left: 2rem;
+    /* Fallback spacing */
+}
+
+.nav-link:first-child {
+    margin-left: 0;
+}
+
+.nav-link:hover {
+    color: #d4af37;
+}
+
+.nav-link.active {
+    color: #d4af37;
+    border-bottom: 1px solid #d4af37;
+    padding-bottom: 2px;
+}
+
+.page-view {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.page-view.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.timeline-line {
+    position: absolute;
+    left: 28px;
+    top: 20px;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, #d4af37 0%, #cbd5e1 100%);
+    z-index: 0;
+}
+
+/* Integrated Form Container */
+.form-container {
+    background-color: #ffffff;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    border-top: 4px solid #020617;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.custom-form input,
+.custom-form select {
+    background-color: #f8fafc;
+    border: none;
+    border-bottom: 1px solid #e2e8f0;
+    border-radius: 0;
+    padding: 1rem 0.75rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: #020617;
+    transition: all 0.3s ease;
+}
+
+.custom-form input:focus,
+.custom-form select:focus {
+    background-color: #ffffff;
+    border-bottom: 1px solid #020617;
+    outline: none;
+}

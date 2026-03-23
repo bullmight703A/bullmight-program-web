@@ -1,0 +1,101 @@
+<?php
+/**
+ * Global Scripts Customizer Settings
+ *
+ * @package wimper-theme
+ * @since 1.0.0
+ */
+
+// Exit if accessed directly
+if (!defined('ABSPATH')) {
+    exit;
+}
+
+/**
+ * Register Global Scripts Customizer Settings
+ */
+function wimper_scripts_customizer_settings($wp_customize)
+{
+    // Add Scripts Section
+    $wp_customize->add_section('wimper_scripts_settings', array(
+        'title' => __('Global Scripts', 'wimper-theme'),
+        'description' => __('Add custom scripts (Google Analytics, Pixels, etc.) to your site header and footer.', 'wimper-theme'),
+        'priority' => 120,
+    ));
+
+    // Header Scripts (wp_head)
+    $wp_customize->add_setting('wimper_header_scripts', array(
+        'default' => '',
+        'sanitize_callback' => 'wimper_sanitize_scripts', // Custom callback to allow tags
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('wimper_header_scripts', array(
+        'label' => __('Header Scripts (Head)', 'wimper-theme'),
+        'description' => __('These scripts will be printed in the &lt;head&gt; section. Use for Google Analytics, GTM, etc.', 'wimper-theme'),
+        'section' => 'wimper_scripts_settings',
+        'type' => 'textarea',
+        'input_attrs' => array(
+            'class' => 'code', // specific font for code
+            'rows' => 10,
+        ),
+    ));
+
+    // Footer Scripts (wp_footer)
+    $wp_customize->add_setting('wimper_footer_scripts', array(
+        'default' => '',
+        'sanitize_callback' => 'wimper_sanitize_scripts',
+        'transport' => 'refresh',
+    ));
+
+    $wp_customize->add_control('wimper_footer_scripts', array(
+        'label' => __('Footer Scripts (Body End)', 'wimper-theme'),
+        'description' => __('These scripts will be printed before the closing &lt;/body&gt; tag.', 'wimper-theme'),
+        'section' => 'wimper_scripts_settings',
+        'type' => 'textarea',
+        'input_attrs' => array(
+            'class' => 'code',
+            'rows' => 10,
+        ),
+    ));
+}
+add_action('customize_register', 'wimper_scripts_customizer_settings');
+
+/**
+ * Sanitize callback for scripts (allow standard HTML/JS)
+ */
+function wimper_sanitize_scripts($input)
+{
+    if (current_user_can('unfiltered_html')) {
+        return $input;
+    }
+    return wp_kses_post($input); // Fallback for lower permission users
+}
+
+/**
+ * Output Header Scripts
+ */
+function wimper_output_header_scripts()
+{
+    $scripts = get_theme_mod('wimper_header_scripts');
+    if ($scripts) {
+        echo "<!-- Global Header Scripts -->\n";
+        echo $scripts . "\n";
+        echo "<!-- End Global Header Scripts -->\n";
+    }
+}
+add_action('wp_head', 'wimper_output_header_scripts', 1);
+
+/**
+ * Output Footer Scripts
+ */
+function wimper_output_footer_scripts()
+{
+    $scripts = get_theme_mod('wimper_footer_scripts');
+    if ($scripts) {
+        echo "<!-- Global Footer Scripts -->\n";
+        echo $scripts . "\n";
+        echo "<!-- End Global Footer Scripts -->\n";
+    }
+}
+add_action('wp_footer', 'wimper_output_footer_scripts', 99);
